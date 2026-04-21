@@ -1,0 +1,21 @@
+{
+  "short_name": "KevsBurger",
+  "name": "Kev's Burger Order Tracker",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#facc15",
+  "background_color": "#e6f4fb",
+  "orientation": "portrait"
+}
