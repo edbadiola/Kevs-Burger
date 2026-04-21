@@ -353,6 +353,11 @@ h2 {
   margin-bottom: 8px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-color);
+  padding-top: 8px;
 }
 .category-scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
@@ -457,4 +462,16 @@ h2 {
 }
 .dark-remove:active {
   background: rgba(255, 255, 255, 0.3) !important;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); height: 0; margin: 0; }
+  to { opacity: 1; transform: translateY(0); height: auto; }
+}
+
+.top-sections {
+  animation: slideDown 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

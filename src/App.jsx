@@ -3,7 +3,42 @@ import Menu from './components/Menu'
 import Cart from './components/Cart'
 import OrderTracker from './components/OrderTracker'
 import BurgerCounter from './components/BurgerCounter'
+import confetti from 'canvas-confetti'
 import './App.css'
+
+const playSuccessSound = () => {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // First note
+    const osc1 = audioCtx.createOscillator();
+    const gain1 = audioCtx.createGain();
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+    gain1.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain1.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+    gain1.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+    osc1.connect(gain1);
+    gain1.connect(audioCtx.destination);
+    osc1.start(audioCtx.currentTime);
+    osc1.stop(audioCtx.currentTime + 0.2);
+
+    // Second higher note (success chime)
+    const osc2 = audioCtx.createOscillator();
+    const gain2 = audioCtx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(1108.73, audioCtx.currentTime + 0.1); // C#6
+    gain2.gain.setValueAtTime(0, audioCtx.currentTime + 0.1);
+    gain2.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 0.15);
+    gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+    osc2.connect(gain2);
+    gain2.connect(audioCtx.destination);
+    osc2.start(audioCtx.currentTime + 0.1);
+    osc2.stop(audioCtx.currentTime + 0.6);
+  } catch(e) {
+    console.error("Audio playback failed", e);
+  }
+};
 
 function App() {
   const [activeTab, setActiveTab] = useState('menu'); // 'menu' or 'tracker'
@@ -50,6 +85,15 @@ function App() {
   const checkout = () => {
     if (cart.length === 0) return;
 
+    // Trigger celebratory effects!
+    confetti({
+      particleCount: 150,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#facc15', '#ef4444', '#38bdf8', '#ffffff'] // Brand colors
+    });
+    playSuccessSound();
+
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const now = new Date();
     
@@ -87,12 +131,16 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="header">
-        <h1>Kev's Burger</h1>
-        <p>Order Taking App</p>
-      </header>
-      
-      <BurgerCounter count={burgersSold} />
+      {cart.length === 0 && (
+        <div className="top-sections">
+          <header className="header">
+            <h1>Kev's Burger</h1>
+            <p>Order Taking App</p>
+          </header>
+          
+          <BurgerCounter count={burgersSold} />
+        </div>
+      )}
 
       <div className="tabs">
         <div 
