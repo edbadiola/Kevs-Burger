@@ -3,6 +3,7 @@ import Menu from './components/Menu'
 import Cart from './components/Cart'
 import OrderTracker from './components/OrderTracker'
 import BurgerCounter from './components/BurgerCounter'
+import ConfirmModal from './components/ConfirmModal'
 import confetti from 'canvas-confetti'
 import './App.css'
 
@@ -43,10 +44,12 @@ const playSuccessSound = () => {
 function App() {
   const [activeTab, setActiveTab] = useState('menu'); // 'menu' or 'tracker'
   const [cart, setCart] = useState([]);
+  const [confirmModal, setConfirmModal] = useState({ isOpen: false, message: '', onConfirm: null });
   const [trackedOrders, setTrackedOrders] = useState(() => {
     const saved = localStorage.getItem('kevs-burger-orders');
     return saved ? JSON.parse(saved) : [];
   });
+
 
   // Save tracked orders to local storage whenever they change
   useEffect(() => {
@@ -77,9 +80,14 @@ function App() {
   };
 
   const clearCart = () => {
-    if (confirm("Are you sure you want to clear your current order?")) {
-      setCart([]);
-    }
+    setConfirmModal({
+      isOpen: true,
+      message: "Are you sure you want to clear your current order?",
+      onConfirm: () => {
+        setCart([]);
+        setConfirmModal({ isOpen: false, message: '', onConfirm: null });
+      }
+    });
   };
 
   const checkout = () => {
@@ -114,9 +122,14 @@ function App() {
   };
 
   const clearOrders = () => {
-    if (confirm("Are you sure you want to clear all tracked orders?")) {
-      setTrackedOrders([]);
-    }
+    setConfirmModal({
+      isOpen: true,
+      message: "Are you sure you want to clear all tracked orders?",
+      onConfirm: () => {
+        setTrackedOrders([]);
+        setConfirmModal({ isOpen: false, message: '', onConfirm: null });
+      }
+    });
   };
 
   const burgersSold = trackedOrders.reduce((total, order) => {
@@ -135,7 +148,6 @@ function App() {
         <div className="top-sections">
           <header className="header">
             <h1>Kev's Burger</h1>
-            <p>Order Taking App</p>
           </header>
           
           <BurgerCounter count={burgersSold} />
@@ -167,6 +179,13 @@ function App() {
       {activeTab === 'tracker' && (
         <OrderTracker orders={trackedOrders} clearOrders={clearOrders} />
       )}
+
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        message={confirmModal.message}
+        onCancel={() => setConfirmModal({ isOpen: false, message: '', onConfirm: null })}
+        onConfirm={confirmModal.onConfirm}
+      />
     </div>
   )
 }

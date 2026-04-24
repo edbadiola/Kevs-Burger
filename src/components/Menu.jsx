@@ -14,20 +14,47 @@ const MENU_CATEGORIES = [
     name: "Combo Meals",
     items: [
       { id: 'combo_1', name: "Combo #1: Cheese Burger", price: 75, icon: "🍔🍟🥤" },
-      { id: 'combo_2', name: "Combo #2: Chicken Burger", price: 73, icon: "🍗🍟🥤" },
-      { id: 'combo_3', name: "Combo #3: Cheesy Hotdog", price: 60, icon: "🌭🍟🥤" }
+      { id: 'combo_2', name: "Combo #2: Chicken Burger", price: 75, icon: "🍗🍟🥤" },
+      { id: 'combo_3', name: "Combo #3: Cheesy Hotdog", price: 65, icon: "🌭🍟🥤" }
     ]
   },
   {
     name: "A La Carte & Sides",
     items: [
       { id: 'alc_hs', name: "Ham Sandwich", price: 30, icon: "🥪" },
-      { id: 'alc_es', name: "Egg Sandwich", price: 30, icon: "🥚🥪" },
+      { id: 'alc_es', name: "Egg Sandwich", price: 35, icon: "🥚🥪" },
       { id: 'alc_hd', name: "Hotdog Sandwich", price: 28, icon: "🌭" },
       { id: 'alc_chd', name: "Chili Hotdog", price: 35, icon: "🌶️🌭" },
       { id: 'alc_chzd', name: "Cheesy Hotdog", price: 37, icon: "🧀🌭" },
+      { id: 'alc_ftlg', name: "Footlong", price: 60, icon: "🌭" },
       { id: 'alc_fr', name: "Fries", price: 35, icon: "🍟" },
-      { id: 'alc_sio', name: "Siomai", price: 35, icon: "🥟" }
+      { id: 'alc_siopao', name: "Siopao", price: 40, icon: "🥟" }
+    ]
+  },
+  {
+    name: "Drinks",
+    items: [
+      { id: 'drk_coke', name: "Coke", price: 25, icon: "🥤" },
+      { id: 'drk_royal', name: "Royal", price: 25, icon: "🥤" },
+      { id: 'drk_sprite', name: "Sprite", price: 25, icon: "🥤" },
+      { id: 'drk_mdew', name: "Mountain Dew", price: 25, icon: "🥤" },
+      { id: 'drk_pepsi_s', name: "Pepsi (Small)", price: 15, icon: "🥤" },
+      { id: 'drk_sting', name: "Sting Energy Drink", price: 30, icon: "⚡" },
+      { id: 'drk_cobra', name: "Cobra Energy Drink", price: 30, icon: "🐍" },
+      { id: 'drk_water_s', name: "Mineral Water (Small)", price: 14, icon: "💧" },
+      { id: 'drk_water_m', name: "Mineral Water (Medium)", price: 20, icon: "💧" },
+      { id: 'drk_water_l', name: "Mineral Water (Large)", price: 30, icon: "💧" }
+    ]
+  },
+  {
+    name: "Snacks",
+    items: [
+      { id: 'snk_nova', name: "Nova Chips", price: 25, icon: "🥔" },
+      { id: 'snk_piattos', name: "Piattos", price: 25, icon: "🥔" },
+      { id: 'snk_vcut', name: "V-Cut", price: 25, icon: "🥔" },
+      { id: 'snk_noodles_s', name: "Cup Noodles (Small)", price: 35, icon: "🍜" },
+      { id: 'snk_noodles_l', name: "Cup Noodles (Large)", price: 50, icon: "🍜" },
+      { id: 'snk_biscuit', name: "Biscuit", price: 10, icon: "🍪" }
     ]
   },
   {
